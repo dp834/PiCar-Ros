@@ -1,6 +1,6 @@
 
-src =
-obj =
+src = SF0180.c
+obj = SF0180.o
 
 build: $(obj)
 
