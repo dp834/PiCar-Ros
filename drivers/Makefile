@@ -1,15 +1,26 @@
 CC = ~/rpi-toolchain/tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/bin/arm-linux-gnueabihf-cc
+export CC
 CFLAGS := -Wall -pedantic
+export CFLAGS
 
 SUBDIRS = MP1593 PCA9685 PCF8591 SF0180 TB6612FNG
 
 MAKE += --silent
+
+INCLUDE = $(realpath ../include)
+export INCLUDE
 
 all: build
 
 build: subdirs
 
 subdirs: $(SUBDIRS)
+
+tests: $(SUBDIRS)
+	@for dir in $(SUBDIRS); do \
+		echo "CC tests driver/$$dir"; \
+		$(MAKE) -C $$dir test; \
+	done
 
 clean:
 	@for dir in $(SUBDIRS); do \
