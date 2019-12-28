@@ -76,13 +76,13 @@ int PCA9685_set_PRE_SCALE(PCA9685 dev, uint32_t frequency, uint32_t clock)
     return i2c_smbus_write_byte_data(dev.i2c_dev_fd, PRE_SCALE, prescaler);
 }
 
-int PCA9685_set_PWM(PCA9685 dev, uint8_t pwm, uint8_t percentage)
+int PCA9685_set_PWM(PCA9685 dev, uint8_t pwm, float percentage)
 {
     return PCA9685_set_PWM_with_shift(dev, pwm, percentage, 0);
 }
 
 /* compared to internal clock counting  [0, 4095] */
-int PCA9685_set_PWM_with_shift(PCA9685 dev, uint8_t pwm, uint8_t percentage,
+int PCA9685_set_PWM_with_shift(PCA9685 dev, uint8_t pwm, float percentage,
                                uint8_t shift_percentage)
 {
     uint16_t on_start;
@@ -92,15 +92,15 @@ int PCA9685_set_PWM_with_shift(PCA9685 dev, uint8_t pwm, uint8_t percentage,
 
     if(percentage == 0){
         return PCA9685_set_off(dev, pwm);
-    }else if(percentage > 100){
+    }else if(percentage > 1){
         /* assume they want fully on */
         return PCA9685_set_on(dev, pwm);
     }
 
 
 
-    on_amount = 4096 * percentage/100;
-    on_start  = 4096 * shift_percentage/100;
+    on_amount = 4096 * percentage;
+    on_start  = 4096 * shift_percentage;
     off_start = on_start + on_amount;
 
     printf("on_start = 0x%x\n", on_start);
