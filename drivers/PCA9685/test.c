@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <fcntl.h>
-#include "PCA9685.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
 #include "linux/i2c-dev.h"
+
+#include "PCA9685.h"
 
 
 
@@ -61,4 +65,6 @@ int main(int argc, char **argv){
 
 
     close(pwm_controller.i2c_dev_fd);
+
+    return 0;
 }
