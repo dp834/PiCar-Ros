@@ -90,9 +90,9 @@ int PCA9685_set_PWM_with_shift(PCA9685 dev, uint8_t pwm, float percentage,
 
     if(percentage == 0){
         return PCA9685_set_off(dev, pwm);
-    }else if(percentage > 1){
-        /* assume they want fully on */
-        return PCA9685_set_on(dev, pwm);
+    }else if(percentage >= 1){
+        /* assume they want full power */
+        percentage = .9999;
     }
 
 

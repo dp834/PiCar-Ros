@@ -58,7 +58,7 @@ int main(int argc, char **argv){
             return PCA9685_set_off(pwm_controller, pwm_id);
             break;
         case('p'):
-            return PCA9685_set_PWM(pwm_controller, pwm_id, 30);
+            return PCA9685_set_PWM(pwm_controller, pwm_id, 30/100.);
         default:
             break;
     }
