@@ -1,5 +1,7 @@
 CC = ~/rpi-toolchain/tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/bin/arm-linux-gnueabihf-cc
 export CC
+INSTALL = /media/exports/rpi4/
+export INSTALL
 CFLAGS := -Wall -pedantic
 export CFLAGS
 
@@ -9,6 +11,7 @@ MAKE += --silent
 
 INCLUDE = $(realpath ../include)
 export INCLUDE
+
 
 all: build
 

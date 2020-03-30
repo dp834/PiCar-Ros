@@ -9,6 +9,7 @@ build: $(obj)
 
 test: $(obj)
 	$(CC) $(CFLAGS) $(TEST_SRC) $(TEST_OBJ) -I$(INCLUDE) -o $(TEST_EXE)
+	cp $(TEST_EXE) $(INSTALL)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $< -c
