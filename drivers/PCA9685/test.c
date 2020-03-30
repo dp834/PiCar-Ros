@@ -39,9 +39,9 @@ int main(int argc, char **argv){
 
     if(ioctl(fd, I2C_SLAVE, 0x40) < 0) {
         fprintf(stderr, "I2C: Error setting slave address\n");
-		return -1;
+        return -1;
     }
-    
+
     pwm_controller.i2c_dev_fd = fd;
 
     if(PCA9685_initialize(pwm_controller)){
@@ -53,7 +53,7 @@ int main(int argc, char **argv){
         case('e'):
             return PCA9685_set_on(pwm_controller, pwm_id);
             break;
-        /* disable */
+            /* disable */
         case('d'):
             return PCA9685_set_off(pwm_controller, pwm_id);
             break;

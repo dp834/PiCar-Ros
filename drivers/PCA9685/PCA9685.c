@@ -38,7 +38,6 @@ int PCA9685_set_PWM_ON(PCA9685 dev, uint8_t pwm, uint16_t value)
 {
     /* top 3 bits are reserved */
     value &= 0x1FFF;
-    //value  = __bswap_16(value);
 
     return i2c_smbus_write_word_data(dev.i2c_dev_fd, PWM_BASE(pwm) + ON_L_OFFSET, value);
 }
@@ -47,7 +46,6 @@ int PCA9685_set_PWM_OFF(PCA9685 dev, uint8_t pwm, uint16_t value)
 {
     /* top 3 bits are reserved */
     value &= 0x1FFF;
-    //value  = __bswap_16(value);
     return i2c_smbus_write_word_data(dev.i2c_dev_fd, PWM_BASE(pwm) + OFF_L_OFFSET, value);
 }
 
