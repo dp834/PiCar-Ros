@@ -1,3 +1,6 @@
+#ifndef PCA9685_H
+#define PCA9685_H
+
 #include <stdint.h>
 
 
@@ -148,3 +151,5 @@ int PCA9685_set_PWM(PCA9685 dev, uint8_t pwm, float percentage);
 int PCA9685_set_PWM_with_shift(PCA9685 dev, uint8_t pwm, float percentage, uint8_t shift_percentage);
 int PCA9685_set_on(PCA9685 dev, uint8_t pwm);
 int PCA9685_set_off(PCA9685 dev, uint8_t pwm);
+
+#endif

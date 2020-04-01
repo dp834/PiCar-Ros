@@ -1,11 +1,14 @@
-CC = ~/rpi-toolchain/tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/bin/arm-linux-gnueabihf-cc
+CC = /opt/pi-tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/bin/arm-linux-gnueabihf-cc
 export CC
 INSTALL = /media/exports/rpi4/
 export INSTALL
 CFLAGS := -Wall -pedantic
 export CFLAGS
 
+AR = /opt/pi-tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/bin/arm-linux-gnueabihf-ar
+
 SUBDIRS = PCA9685 SF0180 TB6612FNG
+OBJECTS=$(foreach %, $(SUBDIRS), $%/$%.o)
 
 MAKE += --silent
 
@@ -30,6 +33,11 @@ clean:
         echo "Cleaning driver/$$dir"; \
 	    $(MAKE) -C $$dir clean ; \
 	done
+
+lib: all
+	@echo "Creating library picar"
+	@$(AR) rcs libpicar.a $(OBJECTS)
+	@cp -p libpicar.a $(INSTALL)
 
 $(SUBDIRS) :
 	@echo "CC driver/$@"

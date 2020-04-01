@@ -1,6 +1,6 @@
 #include "PCA9685.h"
 #include <stdio.h>
-#include <linux/i2c-dev.h>
+#include "linux/i2c-dev.h"
 #include <byteswap.h>
 
 int PCA9685_initialize(PCA9685 dev)

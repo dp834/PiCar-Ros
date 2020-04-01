@@ -1,3 +1,6 @@
+#ifndef SF0180_H
+#define SF0180_H
+
 #include "drivers/PCA9685/PCA9685.h"
 
 /* In degrees */
@@ -21,3 +24,4 @@ int SF0180_initialize(SF0180 dev);
 /* angle in degrees */
 int SF0180_set_angle(SF0180 dev, uint16_t angle);
 
+#endif

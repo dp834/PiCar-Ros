@@ -1,3 +1,6 @@
+#ifndef TB6612FNG_H
+#define TB6612FNG_H
+
 #include <stdint.h>
 #include "drivers/PCA9685/PCA9685.h"
 
@@ -24,3 +27,5 @@ int TB6612FNG_close(TB6612FNG dev);
 int TB6612FNG_set_control(TB6612FNG dev, uint8_t motor, ControlFunction mode);
 ControlFunction TB6612FNG_get_control(TB6612FNG dev, uint8_t motor);
 int TB6612FNG_set_speed(TB6612FNG dev, uint8_t motor, float percentage);
+
+#endif
