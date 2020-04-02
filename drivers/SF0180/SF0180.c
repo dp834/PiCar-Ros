@@ -32,10 +32,8 @@ int SF0180_set_angle(SF0180 dev, uint16_t angle)
      * Since frequency = 1/period */
 
     pulse_width *= PWM_FREQUENCY;
-    printf("pulse_width %f\n", pulse_width);
     /* Get pulse width as a fraction of a second (duty cycle) */
     pulse_width /= 1000000;
-    printf("Duty cycle %f\n", pulse_width);
 
 
     return PCA9685_set_PWM(dev.pwm_dev, dev.pwm, pulse_width);
