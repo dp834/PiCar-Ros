@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "linux/i2c-dev.h"
 #include <byteswap.h>
+#include <unistd.h>
 
 int PCA9685_initialize(PCA9685 dev)
 {
@@ -100,6 +101,30 @@ int PCA9685_set_PRE_SCALE(PCA9685 dev, uint32_t frequency, uint32_t clock)
         return status;
     }
 
+    /* now in restart mode, see section 7.3.1.1 of PCA9685 manual */
+    /* read MODE1 register */
+    status = PCA9685_get_register(dev, MODE1, &reg_val);
+    if(status){
+        return status;
+    }
+
+    if(!(reg_val & MODE1_RESTART)){
+        /* we are done */
+        return 0;
+    }
+
+    /* clear sleep bit */
+    reg_val &= ~MODE1_SLEEP;
+    status = PCA9685_set_register(dev, MODE1, reg_val);
+    if(status){
+        return status;
+    }
+
+    /* let oscillator stabilize) */
+    usleep(500);
+
+    /* write logic 1 to restart bit to clear */
+    reg_val |= MODE1_RESTART;
     status = PCA9685_set_register(dev, MODE1, reg_val);
     if(status){
         return status;
