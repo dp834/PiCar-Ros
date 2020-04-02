@@ -26,6 +26,7 @@ int TB6612FNG_initialize(TB6612FNG dev);
 int TB6612FNG_close(TB6612FNG dev);
 int TB6612FNG_set_control(TB6612FNG dev, uint8_t motor, ControlFunction mode);
 ControlFunction TB6612FNG_get_control(TB6612FNG dev, uint8_t motor);
-int TB6612FNG_set_speed(TB6612FNG dev, uint8_t motor, float percentage);
+int TB6612FNG_set_speed(TB6612FNG dev, uint8_t motor, float speed);
+int TB6612FNG_get_speed(TB6612FNG dev, uint8_t motor, float *speed);
 
 #endif

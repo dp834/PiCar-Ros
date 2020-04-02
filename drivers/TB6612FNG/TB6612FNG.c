@@ -104,3 +104,12 @@ int TB6612FNG_set_speed(TB6612FNG dev, uint8_t motor, float speed){
     return PCA9685_set_PWM(dev.pwm_dev, dev.motor[motor].pwm, speed);
 }
 
+int TB6612FNG_get_speed(TB6612FNG dev, uint8_t motor, float *speed){
+    /* must select valid motor  */
+    if(motor != 0 && motor != 1){
+        return -1;
+    }
+
+    return PCA9685_get_PWM(dev.pwm_dev, dev.motor[motor].pwm, speed);
+}
+
