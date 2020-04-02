@@ -58,11 +58,18 @@ bool drivetrain_request_handler(DrivetrainRequest &req, DrivetrainResponse &res)
 void drivetrain_status_publish(ros::Publisher &pub){
     robot_io::DrivetrainStatus status;
     float speed;
+    uint16_t angle;
+
     if(TB6612FNG_get_speed(drive_motors, 0, &speed)){
         return;
     }
     status.power = speed*100;
-    status.angle = 0;
+
+    if(SF0180_get_angle(steer_servo, &angle)){
+        return;
+    }
+    status.angle = angle - 180 + DRIVETRAIN_STRAIGHT_ANGLE;
+
     pub.publish(status);
 }
 
