@@ -9,8 +9,8 @@
 #define MAX_ANGLE 180
 
 /* In micro seconds */
-#define PULSE_WIDTH_MIN 1000
-#define PULSE_WIDTH_MAX 2000
+#define PULSE_WIDTH_MIN 500
+#define PULSE_WIDTH_MAX 2500
 
 /* In Hz */
 #define PWM_FREQUENCY 50

@@ -20,7 +20,7 @@ int SF0180_set_angle(SF0180 dev, uint16_t angle)
 
     /* angle/(max_angle - min_angle) * (max_width - min_width) + min_width
      * convert angle to a percentage of range and scale to the new range */
-    pulse_width  = angle/(MAX_ANGLE - MIN_ANGLE);
+    pulse_width  = (angle - MIN_ANGLE)/(float)(MAX_ANGLE - MIN_ANGLE);
     pulse_width *= (PULSE_WIDTH_MAX - PULSE_WIDTH_MIN);
     pulse_width += PULSE_WIDTH_MIN;
 
