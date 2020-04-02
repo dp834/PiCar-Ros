@@ -144,11 +144,17 @@ typedef struct{
 
 int PCA9685_initialize(PCA9685 dev);
 int PCA9685_set_register(PCA9685 dev, uint8_t reg, uint8_t value);
+int PCA9685_get_register(PCA9685 dev, uint8_t reg, uint8_t *value);
+
 int PCA9685_set_PWM_ON(PCA9685 dev, uint8_t pwm, uint16_t value);
 int PCA9685_set_PWM_OFF(PCA9685 dev, uint8_t pwm, uint16_t value);
+
 int PCA9685_set_PRE_SCALE(PCA9685 dev, uint32_t frequency, uint32_t clock);
+
 int PCA9685_set_PWM(PCA9685 dev, uint8_t pwm, float percentage);
 int PCA9685_set_PWM_with_shift(PCA9685 dev, uint8_t pwm, float percentage, uint8_t shift_percentage);
+int PCA9685_get_PWM(PCA9685 dev, uint8_t pwm, float *percentage);
+
 int PCA9685_set_on(PCA9685 dev, uint8_t pwm);
 int PCA9685_set_off(PCA9685 dev, uint8_t pwm);
 
