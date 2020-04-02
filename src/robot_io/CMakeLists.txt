@@ -212,8 +212,8 @@ set_target_properties(picar PROPERTIES IMPORTED_LOCATION /usr/lib/libpicar.a)
 
 add_executable(drivetrain_server src/nodes/drivetrain_server.cpp)
 target_link_libraries(drivetrain_server picar ${catkin_LIBRARIES})
-add_dependencies(drivetrain_server robot_io_gencpp)
+add_dependencies(drivetrain_server robot_io_generate_messages_cpp)
 
-#add_executable(camera_motion_server src/nodes/camera_motion_server.cpp)
-#target_link_libraries(camera_motion_server picar ${catkin_LIBRARIES})
-#add_dependencies(camera_motion_server robot_io_gencpp)
+add_executable(camera_motion_server src/nodes/camera_motion_server.cpp)
+target_link_libraries(camera_motion_server picar ${catkin_LIBRARIES})
+add_dependencies(camera_motion_server robot_io_generate_messages_cpp)
