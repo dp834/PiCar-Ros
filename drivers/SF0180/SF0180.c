@@ -39,7 +39,30 @@ int SF0180_set_angle(SF0180 dev, uint16_t angle)
     return PCA9685_set_PWM(dev.pwm_dev, dev.pwm, pulse_width);
 }
 
-int SF0180_initialize(SF0180 dev){
+int SF0180_get_angle(SF0180 dev, uint16_t *angle)
+{
+    float pulse_width;
+    int status;
+
+    status = PCA9685_get_PWM(dev.pwm_dev, dev.pwm, &pulse_width);
+    if(status){
+        return status;
+    }
+
+    /* undo conversion from the set_angle function above */
+    pulse_width *= 1000000;
+    pulse_width /= PWM_FREQUENCY;
+    pulse_width -= PULSE_WIDTH_MIN;
+    pulse_width /= (PULSE_WIDTH_MAX - PULSE_WIDTH_MIN);
+
+    /* Not sure why the angle is one below what it should be */
+    *angle = pulse_width*(MAX_ANGLE - MIN_ANGLE) + MIN_ANGLE + 1;
+
+    return 0;
+}
+
+int SF0180_initialize(SF0180 dev)
+{
     int status;
 
     status = PCA9685_initialize(dev.pwm_dev);
