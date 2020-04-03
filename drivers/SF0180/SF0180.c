@@ -61,6 +61,29 @@ int SF0180_get_angle(SF0180 dev, uint16_t *angle)
     return 0;
 }
 
+int SF0180_set_angle_from_center(SF0180 dev, uint16_t center, int16_t angle)
+{
+    angle += center;
+    if(angle < 0){
+        return -1;
+    }
+
+    return SF0180_set_angle(dev, angle);
+}
+int SF0180_get_angle_from_center(SF0180 dev, uint16_t center, int16_t *rel_angle)
+{
+    int status;
+    uint16_t angle;
+    status = SF0180_get_angle(dev, &angle);
+    if(status){
+        return status;
+    }
+
+    *rel_angle = angle - center;
+
+    return 0;
+}
+
 int SF0180_initialize(SF0180 dev)
 {
     int status;

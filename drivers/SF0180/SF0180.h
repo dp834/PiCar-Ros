@@ -24,5 +24,7 @@ int SF0180_initialize(SF0180 dev);
 /* angle in degrees */
 int SF0180_set_angle(SF0180 dev, uint16_t angle);
 int SF0180_get_angle(SF0180 dev, uint16_t *angle);
+int SF0180_set_angle_from_center(SF0180 dev, uint16_t center, int16_t angle);
+int SF0180_get_angle_from_center(SF0180 dev, uint16_t center, int16_t *angle);
 
 #endif
