@@ -1,0 +1,2 @@
+int16 horizontal_angle
+int16 vertical_angle
