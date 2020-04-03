@@ -13,8 +13,8 @@ extern "C"{
 static const std::string SERVICE ="drivetrain_request";
 static const std::string STATUS_PUBSHISHER ="drivetrain_status";
 
-/* 90 degrees is the middle, and the rest is offset for the particular servo */
-static const uint16_t DRIVETRAIN_STRAIGHT_ANGLE = 90 - 10;
+/* MAX_ANGLE - switches left and right, 90 degrees is the middle, and the rest is offset for the particular servo */
+static const uint16_t DRIVETRAIN_STRAIGHT_ANGLE = MAX_ANGLE - (90 - 10);
 
 typedef robot_io::DrivetrainRequest::Request  DrivetrainRequest;
 typedef robot_io::DrivetrainRequest::Response DrivetrainResponse;
@@ -47,7 +47,7 @@ bool drivetrain_request_handler(DrivetrainRequest &req, DrivetrainResponse &res)
     }
 
     /* positive angle is right, negative is left */
-    if(SF0180_set_angle(steer_servo, 180 - DRIVETRAIN_STRAIGHT_ANGLE + req.angle)){
+    if(SF0180_set_angle_from_center(steer_servo, DRIVETRAIN_STRAIGHT_ANGLE, req.angle)){
         ROS_WARN("Drivetrain: failed to set steering angle");
         return false;
     }
@@ -65,10 +65,9 @@ void drivetrain_status_publish(ros::Publisher &pub){
     }
     status.power = speed*100;
 
-    if(SF0180_get_angle(steer_servo, &angle)){
+    if(SF0180_get_angle_from_center(steer_servo, DRIVETRAIN_STRAIGHT_ANGLE, &status.angle)){
         return;
     }
-    status.angle = angle - 180 + DRIVETRAIN_STRAIGHT_ANGLE;
 
     pub.publish(status);
 }
